@@ -1,9 +1,11 @@
 let arrayOfCustomers = require("./data.js").arrayOfCustomers;
+// list of all shopping baskets that belong to customer email address
 function getCustomerBasket(email) {
   return arrayOfCustomers.filter((element) => element.email === email);
 }
 getCustomerBasket("tshepo@umuzi.org");
 
+//list of all customers email address
 function getAllCustomers() {
   const allCustomers = arrayOfCustomers.map((element) => element.email);
   let removeDuplicates = [...new Set(allCustomers)];
@@ -11,6 +13,7 @@ function getAllCustomers() {
 }
 getAllCustomers();
 
+// list of all items that been paid for but not delivered yet
 function requiredStock() {
   let formattedItems = [];
   let consolidatedItems = [];
@@ -51,16 +54,16 @@ function getConsolidatedItems(allCustomerItems) {
 }
 requiredStock();
 
+// total spent by each customer
 function totalSpent(email) {
-  const DELIVERED = "DELIVERED"
-  const PAID =  "PAID" 
-  
-  
+  const DELIVERED = "DELIVERED";
+  const PAID = "PAID";
+
   let customerItems = arrayOfCustomers.filter(
     (element) => element.email === email
   );
   const items = customerItems
-    .filter((cart) => cart.status === PAID|| cart.status ===DELIVERED )
+    .filter((cart) => cart.status === PAID || cart.status === DELIVERED)
     .map((cart) => cart.items);
   const merged = [].concat.apply([], items).map((item) => item.price);
   let total =
@@ -70,7 +73,7 @@ function totalSpent(email) {
   return total;
 }
 totalSpent("mo@umuzi.org");
-
+// list of customers according to how much they spent in desceding order
 function topCustomer() {
   let customers = [];
 
